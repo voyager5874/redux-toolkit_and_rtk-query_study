@@ -13,7 +13,7 @@
   padding: 20px;
   border: 1px solid orange;
   margin-top: 15px;
-  width: 100%;
+  width: 50%;
   display: flex;
   justify-content: space-between;
 }
