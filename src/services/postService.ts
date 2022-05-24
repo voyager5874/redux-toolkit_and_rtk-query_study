@@ -3,15 +3,41 @@ import {PostType} from "models/Post";
 
 export const postAPI = createApi({
     reducerPath: 'postAPI',
-    baseQuery: fetchBaseQuery({baseUrl: 'https://jsonplaceholder.typicode.com'}),
+    baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:5000'}),
+    tagTypes: ['Post'],
     endpoints: (build) => ({
         fetchAllPosts: build.query<PostType[], number>({
-            query: (limit= 5) => ({
+            query: (limit = 5) => ({
                 url: '/posts',
                 params: {
                     _limit: limit
                 }
-            })
+            }),
+            providesTags: result => ['Post']
+        }),
+        createPost: build.mutation<PostType, PostType>({
+            query: (post) => ({
+                url: `/posts`,
+                method: 'POST',
+                body: post
+            }),
+            invalidatesTags: ['Post']
+        }),
+        updatePost: build.mutation<PostType, PostType>({
+            query: (post) => ({
+                url: `/posts/${post.id}`,
+                method: 'PUT',
+                body: post
+            }),
+            invalidatesTags: ['Post']
+        }),
+        deletePost: build.mutation<PostType, PostType>({
+            query: (post) => ({
+                url: `/posts/${post.id}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['Post']
         })
-})
+
+    })
 })

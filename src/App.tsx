@@ -3,6 +3,7 @@ import './App.css';
 import {useAppDispatch, useAppSelector} from "hooks/redux";
 import {fetchUsers} from "store/reducers/ActionCreators";
 import {PostsContainer} from "components/PostsContainer";
+import {PostsContainer2} from "components/PostsContainer2";
 
 function App() {
     const {users, isLoading, error} = useAppSelector(state => state.userReducer);
@@ -22,8 +23,9 @@ function App() {
                     <li className={"user"}><b>{user.name} </b>{user.email}</li>
                 </ul>)}
             </div>
-            <div>
+            <div style={{display: 'flex'}}>
                 <PostsContainer/>
+                <PostsContainer2/>
             </div>
         </div>
     );
